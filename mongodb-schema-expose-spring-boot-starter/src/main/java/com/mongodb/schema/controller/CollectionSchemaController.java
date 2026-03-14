@@ -45,7 +45,7 @@ public class CollectionSchemaController {
      * Get the schema for a specific collection by name.
      */
     @GetMapping("/{collectionName}/schema")
-    public ResponseEntity<CollectionSchema> getSchema(@PathVariable String collectionName) {
+    public ResponseEntity<CollectionSchema> getSchema(@PathVariable("collectionName") String collectionName) {
         CollectionSchema schema = schemaReflectionService.getSchema(collectionName);
         return ResponseEntity.ok(schema);
     }
