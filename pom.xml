@@ -14,6 +14,7 @@
 
     <modules>
         <module>mongodb-schema-expose-spring-boot-starter</module>
+        <module>mongodb-schema-expose-example</module>
     </modules>
 
     <properties>
