@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mongodb.schema</groupId>
+        <groupId>com.rochafederico.schema</groupId>
         <artifactId>mongodb-schema-expose-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>

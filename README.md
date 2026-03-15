@@ -18,7 +18,7 @@ Agregar la dependencia en el `pom.xml` de la API:
 
 ```xml
 <dependency>
-    <groupId>com.mongodb.schema</groupId>
+    <groupId>com.rochafederico.schema</groupId>
     <artifactId>mongodb-schema-expose-spring-boot-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
