@@ -88,6 +88,18 @@ public class SchemaReflectionService {
      * if present, otherwise defaults to the Java field name.
      */
     private String resolveKey(Field field) {
+        // Check for @Id annotation (Spring Data) — maps to "_id" in MongoDB
+        try {
+            org.springframework.data.annotation.Id idAnnotation =
+                    field.getAnnotation(org.springframework.data.annotation.Id.class);
+            if (idAnnotation != null) {
+                return "_id";
+            }
+        } catch (NoClassDefFoundError ignored) {
+            // spring-data-commons not on classpath
+        }
+
+        // Check for @Field annotation (Spring Data MongoDB)
         try {
             org.springframework.data.mongodb.core.mapping.Field mongoField =
                     field.getAnnotation(org.springframework.data.mongodb.core.mapping.Field.class);

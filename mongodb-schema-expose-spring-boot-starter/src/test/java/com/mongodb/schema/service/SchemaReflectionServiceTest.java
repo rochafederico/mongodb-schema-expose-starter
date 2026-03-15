@@ -8,6 +8,8 @@ import com.mongodb.schema.registry.CollectionSchemaRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.springframework.data.annotation.Id;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -122,12 +124,32 @@ class SchemaReflectionServiceTest {
         assertEquals("Boolean", field.getType());
     }
 
+    @Test
+    void shouldMapIdAnnotatedFieldToUnderscoreId() {
+        registry.register("withId", IdDoc.class);
+        CollectionSchema schema = service.getSchema("withId");
+
+        FieldDefinition idField = findField(schema.getFields(), "_id");
+        assertNotNull(idField, "Field with @Id should have key '_id'");
+        assertEquals("String", idField.getType());
+
+        // Ensure original field name 'id' is not present as key
+        FieldDefinition rawIdField = findField(schema.getFields(), "id");
+        assertNull(rawIdField, "Original field name 'id' should not appear when @Id is present");
+    }
+
     // --- Test document classes ---
 
     static class SimpleDoc {
         private String name;
         private int age;
         private boolean active;
+    }
+
+    static class IdDoc {
+        @Id
+        private String id;
+        private String name;
     }
 
     static class AnnotatedDoc {

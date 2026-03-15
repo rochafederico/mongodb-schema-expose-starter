@@ -46,6 +46,11 @@ public class CollectionSchemaController {
      */
     @GetMapping("/{collectionName}/schema")
     public ResponseEntity<CollectionSchema> getSchema(@PathVariable("collectionName") String collectionName) {
+        if (collectionName == null || collectionName.isBlank()
+                || collectionName.length() > 128
+                || !collectionName.matches("^[a-zA-Z0-9_\\-]+$")) {
+            return ResponseEntity.badRequest().build();
+        }
         CollectionSchema schema = schemaReflectionService.getSchema(collectionName);
         return ResponseEntity.ok(schema);
     }

@@ -1,6 +1,7 @@
 package com.mongodb.schema.model;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents the full schema of a MongoDB collection,
@@ -33,5 +34,27 @@ public class CollectionSchema {
 
     public void setFields(List<FieldDefinition> fields) {
         this.fields = fields;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CollectionSchema that = (CollectionSchema) o;
+        return Objects.equals(collection, that.collection)
+                && Objects.equals(fields, that.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(collection, fields);
+    }
+
+    @Override
+    public String toString() {
+        return "CollectionSchema{" +
+                "collection='" + collection + '\'' +
+                ", fields=" + fields +
+                '}';
     }
 }

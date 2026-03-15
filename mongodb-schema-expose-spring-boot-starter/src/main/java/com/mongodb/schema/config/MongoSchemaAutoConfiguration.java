@@ -4,8 +4,10 @@ import com.mongodb.schema.controller.CollectionSchemaController;
 import com.mongodb.schema.registry.CollectionSchemaRegistry;
 import com.mongodb.schema.service.SchemaReflectionService;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.DispatcherServlet;
 
 /**
  * Spring Boot auto-configuration for the MongoDB Schema Expose library.
@@ -17,6 +19,7 @@ import org.springframework.context.annotation.Bean;
  * their document classes at startup.</p>
  */
 @AutoConfiguration
+@ConditionalOnClass(DispatcherServlet.class)
 public class MongoSchemaAutoConfiguration {
 
     @Bean

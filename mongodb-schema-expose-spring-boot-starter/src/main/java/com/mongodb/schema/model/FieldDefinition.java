@@ -1,5 +1,7 @@
 package com.mongodb.schema.model;
 
+import java.util.Objects;
+
 /**
  * Represents a single field definition within a MongoDB collection schema.
  */
@@ -40,5 +42,29 @@ public class FieldDefinition {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FieldDefinition that = (FieldDefinition) o;
+        return Objects.equals(key, that.key)
+                && Objects.equals(label, that.label)
+                && Objects.equals(type, that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(key, label, type);
+    }
+
+    @Override
+    public String toString() {
+        return "FieldDefinition{" +
+                "key='" + key + '\'' +
+                ", label='" + label + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }
